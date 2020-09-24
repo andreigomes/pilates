@@ -1,6 +1,5 @@
-package com.pilates.controller;
+package com.pilates.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -9,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pilates.model.Categoria;
+import com.pilates.models.Categoria;
 import com.pilates.services.CategoriaService;
 
 @RestController
@@ -24,21 +23,14 @@ public class CategoriaController {
 	}
 
 	@RequestMapping(method=RequestMethod.GET)
-	public List<Categoria>  findAll() {
-		
-		Categoria categoria1 = new Categoria(1, "Informática");
-		Categoria categoria2 = new Categoria(1, "Escritório");
-		
-		List<Categoria> lista = new ArrayList<>();
-		lista.add(categoria1);
-		lista.add(categoria2);
-		
-		return lista;
+	public ResponseEntity<?>  findAll() {
+		List<Categoria> categoria = categoriaService.findAll();
+		return ResponseEntity.ok().body(categoria);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?>  FindById(@PathVariable Integer id) {
-		Categoria categoria = categoriaService.findOne(id);
+		Categoria categoria = categoriaService.findById(id);
 
 		return ResponseEntity.ok().body(categoria);
 	}

@@ -1,4 +1,4 @@
-package com.pilates.model;
+package com.pilates.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,10 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Categoria implements Serializable {
+public class Estado implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -19,39 +19,51 @@ public class Categoria implements Serializable {
 	private Integer id;
 	private String nome;
 	
-	@ManyToMany(mappedBy="categorias")
-	private List<Produto> produtos = new ArrayList<>();
+	@OneToMany(mappedBy = "estado")
+	private List<Cidade> cidades = new ArrayList<>();
+		
 	
-
-	public Categoria() {
+	public Estado() {
 		
 	}
 
-	public Categoria(Integer id, String nome) {
+
+	public Estado(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
 	}
 
+
 	public Integer getId() {
 		return id;
 	}
+
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+
 	public String getNome() {
 		return nome;
 	}
 
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public List<Produto> getProdutos() {
-		return produtos;
+
+
+	public List<Cidade> getCidades() {
+		return cidades;
 	}
+
+
+	public void setCidades(List<Cidade> cidades) {
+		this.cidades = cidades;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -61,6 +73,7 @@ public class Categoria implements Serializable {
 		return result;
 	}
 
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -69,7 +82,7 @@ public class Categoria implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		Estado other = (Estado) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

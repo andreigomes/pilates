@@ -7,9 +7,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.pilates.model.Categoria;
-import com.pilates.model.Produto;
+import com.pilates.models.Categoria;
+import com.pilates.models.Cidade;
+import com.pilates.models.Estado;
+import com.pilates.models.Produto;
 import com.pilates.repositories.CategoriaRepository;
+import com.pilates.repositories.CidadeRepository;
+import com.pilates.repositories.EstadoRepository;
 import com.pilates.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -20,6 +24,12 @@ public class PilatesApplication implements CommandLineRunner {
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	
+	@Autowired
+	private EstadoRepository estadoRepository;
+	
+	@Autowired
+	private CidadeRepository cidadeRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PilatesApplication.class, args);
@@ -46,6 +56,17 @@ public class PilatesApplication implements CommandLineRunner {
 	categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2));
 	produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3));
 		
+	
+	Estado estado1 = new Estado(null, "São Paulo");
+	Estado estado2 = new Estado(null, "Minas Gerais");
+	
+	Cidade cidade1 = new Cidade(null, "Assis", estado1);
+	Cidade cidade2 = new Cidade(null, "Capitólio", estado2);
+	Cidade cidade3 = new Cidade(null, "Ouro Preto", estado2);
+	
+	estadoRepository.saveAll(Arrays.asList(estado1, estado2));
+	cidadeRepository.saveAll(Arrays.asList(cidade1, cidade2, cidade3));
+	
 	}
 
 }
