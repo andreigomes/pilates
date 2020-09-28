@@ -20,8 +20,8 @@ public class ProdutoService {
 
 	
 	public Produto findById(Integer id) {
-		Optional<Produto> categoria = produtoRepository.findById(id);
-		return categoria.orElse(null);
+		Optional<Produto> produto = produtoRepository.findById(id);
+		return produto.orElse(null);
 	}
 
 	public ProdutoService(ProdutoRepository repository) {

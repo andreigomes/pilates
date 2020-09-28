@@ -92,6 +92,9 @@ public class Cliente implements Serializable {
 		return telefones;
 	}
 
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
 
 	@Override
 	public int hashCode() {

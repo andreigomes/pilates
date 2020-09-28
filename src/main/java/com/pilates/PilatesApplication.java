@@ -51,40 +51,31 @@ public class PilatesApplication implements CommandLineRunner {
 		
 	Categoria categoria1 = new Categoria(null, "Informática");
 	Categoria categoria2 = new Categoria(null, "Escritório");
+	categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2));
 	
 	Produto produto1 = new Produto(null, "Computador", 2000.00);
 	Produto produto2 = new Produto(null, "Impressora", 800.00);
-	Produto produto3 = new Produto(null, "Mouse", 80.00);
-
-	//categoria1.getProdutos().addAll(Arrays.asList(produto1, produto2, produto3));
-	//categoria1.getProdutos().addAll(Arrays.asList(produto2));
-	
-	
+	Produto produto3 = new Produto(null, "Mouse", 80.00);	
 	produto1.getCategorias().addAll(Arrays.asList(categoria1));
 	produto2.getCategorias().addAll(Arrays.asList(categoria1, categoria2));
-	produto3.getCategorias().addAll(Arrays.asList(categoria1));	
-	
-	categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2));
-	produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3));
-		
+	produto3.getCategorias().addAll(Arrays.asList(categoria1));		
+	produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3));	
 	
 	Estado estado1 = new Estado(null, "São Paulo");
 	Estado estado2 = new Estado(null, "Minas Gerais");
+	estadoRepository.saveAll(Arrays.asList(estado1, estado2));
 	
 	Cidade cidade1 = new Cidade(null, "Assis", estado1);
 	Cidade cidade2 = new Cidade(null, "Capitólio", estado2);
 	Cidade cidade3 = new Cidade(null, "Ouro Preto", estado2);
-	
-	estadoRepository.saveAll(Arrays.asList(estado1, estado2));
 	cidadeRepository.saveAll(Arrays.asList(cidade1, cidade2, cidade3));
 	
 	Cliente cliente1 = new 	Cliente(null, "Andrei Gomes", "andrei_sps@hotmail.com", "40806958880", TipoCliente.PESSOAFISICA);
 	cliente1.getTelefones().addAll(Arrays.asList("988224834", "997141840"));
+	clienteRepository.saveAll(Arrays.asList(cliente1));
 	
 	Endereco endereco1 = new Endereco(null, "Rua Duque de Caxias", "441", "", "Centro", "19800000", cliente1, cidade3);
 	Endereco endereco2 = new Endereco(null, "Rua Duque de Caxias", "441", "", "Centro", "19800000", cliente1, cidade2);
-	
-	clienteRepository.saveAll(Arrays.asList(cliente1));
 	enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2));
 	
 	}
