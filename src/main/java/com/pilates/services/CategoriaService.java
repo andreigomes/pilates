@@ -3,6 +3,7 @@ package com.pilates.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pilates.models.Categoria;
@@ -12,6 +13,7 @@ import com.pilates.services.exceptions.ObjectNotFoundException;
 @Service
 public class CategoriaService {
 	
+	@Autowired
 	private CategoriaRepository categoriaRepository;
 	
 	public List<Categoria> findAll() {
@@ -24,10 +26,10 @@ public class CategoriaService {
 		return categoria.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: Categoria"));
 	}
-
-	public CategoriaService(CategoriaRepository repository) {
-		super();
-		this.categoriaRepository = repository;
+	
+	public Categoria insert(Categoria categoria) {
+		categoria.setId(null);
+		return categoriaRepository.save(categoria);
 	}
 	
 
