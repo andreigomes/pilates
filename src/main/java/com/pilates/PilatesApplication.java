@@ -13,6 +13,7 @@ import com.pilates.models.Cidade;
 import com.pilates.models.Cliente;
 import com.pilates.models.Endereco;
 import com.pilates.models.Estado;
+import com.pilates.models.ItemPedido;
 import com.pilates.models.Pagamento;
 import com.pilates.models.PagamentoComBoleto;
 import com.pilates.models.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.pilates.repositories.CidadeRepository;
 import com.pilates.repositories.ClienteRepository;
 import com.pilates.repositories.EnderecoRepository;
 import com.pilates.repositories.EstadoRepository;
+import com.pilates.repositories.ItemPedidoRepository;
 import com.pilates.repositories.PagamentoRepository;
 import com.pilates.repositories.PedidoRepository;
 import com.pilates.repositories.ProdutoRepository;
@@ -55,6 +57,9 @@ public class PilatesApplication implements CommandLineRunner {
 	
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PilatesApplication.class, args);
@@ -105,6 +110,16 @@ public class PilatesApplication implements CommandLineRunner {
 	
 	pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2));
 	pagamentoRepository.saveAll(Arrays.asList(pagamento1, pagamento2));
+	
+	ItemPedido itemPedido1 = new ItemPedido(pedido1, produto1, 0.00, 1.00, 2000.00);
+	ItemPedido itemPedido2 = new ItemPedido(pedido1, produto3, 0.00, 2.00, 80.00);
+	ItemPedido itemPedido3 = new ItemPedido(pedido2, produto2, 0.00, 100.00, 800.00);
+	
+	pedido1.getItens().addAll(Arrays.asList(itemPedido1, itemPedido2));
+	pedido2.getItens().addAll(Arrays.asList(itemPedido3));
+	
+	itemPedidoRepository.saveAll(Arrays.asList(itemPedido1, itemPedido2, itemPedido3));
+			
 	}
 
 }
