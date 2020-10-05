@@ -12,22 +12,22 @@ import com.pilates.services.exceptions.ObjectNotFoundException;
 @Service
 public class ClienteService {
 	
-	private ClienteRepository categoriaRepository;
+	private ClienteRepository clienteRepository;
 	
 	public List<Cliente> findAll() {
-		List<Cliente> categoria = categoriaRepository.findAll();
+		List<Cliente> categoria = clienteRepository.findAll();
 		return categoria;
 	}
 
 	public Cliente findById(Integer id) {
-		Optional<Cliente> categoria = categoriaRepository.findById(id);
+		Optional<Cliente> categoria = clienteRepository.findById(id);
 		return categoria.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: Cliente"));
 	}
 
 	public ClienteService(ClienteRepository repository) {
 		super();
-		this.categoriaRepository = repository;
+		this.clienteRepository = repository;
 	}
 	
 
