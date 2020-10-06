@@ -70,7 +70,14 @@ public class PilatesApplication implements CommandLineRunner {
 		
 	Categoria categoria1 = new Categoria(null, "Informática");
 	Categoria categoria2 = new Categoria(null, "Escritório");
-	categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2));
+	Categoria categoria3 = new Categoria(null, "Eletronico");
+	Categoria categoria4 = new Categoria(null, "Cama mesa e banho");
+	Categoria categoria5 = new Categoria(null, "Perfumaria");
+	Categoria categoria6 = new Categoria(null, "Acabamentos");
+	Categoria categoria7 = new Categoria(null, "Diversos");
+	Categoria categoria8 = new Categoria(null, "Utensilios");
+	categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2, categoria3, categoria4,
+			categoria5, categoria6, categoria7, categoria8));
 	
 	Produto produto1 = new Produto(null, "Computador", 2000.00);
 	Produto produto2 = new Produto(null, "Impressora", 800.00);
