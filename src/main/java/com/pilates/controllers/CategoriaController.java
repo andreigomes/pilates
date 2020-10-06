@@ -2,6 +2,7 @@ package com.pilates.controllers;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.pilates.dto.CategoriaDTO;
 import com.pilates.models.Categoria;
 import com.pilates.services.CategoriaService;
 
@@ -26,9 +28,10 @@ public class CategoriaController {
 	}
 
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<Categoria>>  findAll() {
-		List<Categoria> categoria = categoriaService.findAll();
-		return ResponseEntity.ok().body(categoria);
+	public ResponseEntity<List<CategoriaDTO>>  findAll() {
+		List<Categoria> listaCategoria = categoriaService.findAll();
+		List<CategoriaDTO> listaCategoriaDto = listaCategoria.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listaCategoriaDto);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
