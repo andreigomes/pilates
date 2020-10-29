@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.pilates.dto.CategoriaDTO;
+import com.pilates.dto.response.CategoriaResponseDTO;
 import com.pilates.models.Categoria;
 import com.pilates.services.CategoriaService;
 
@@ -31,22 +31,22 @@ public class CategoriaController {
 	}
 
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<CategoriaDTO>>  findAll() {
+	public ResponseEntity<List<CategoriaResponseDTO>>  findAll() {
 		List<Categoria> listaCategoria = categoriaService.findAll();
-		List<CategoriaDTO> listaCategoriaDto = listaCategoria.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listaCategoriaDto);
+		List<CategoriaResponseDTO> listaCategoriaResponseDTO = listaCategoria.stream().map(obj -> new CategoriaResponseDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listaCategoriaResponseDTO);
 	}
 	
 	
 	//http://localhost:8080/categorias/page?linesPerPage=3&page=0&direction=DESC
 	@RequestMapping(value = "page", method=RequestMethod.GET)
-	public ResponseEntity<Page<CategoriaDTO>>  findPage(
+	public ResponseEntity<Page<CategoriaResponseDTO>>  findPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page, 
 			@RequestParam(value = "linesPerPage", defaultValue = "24")Integer linesPerPage, 
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy, 
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
 		Page<Categoria> listaCategoria = categoriaService.findPage(page, linesPerPage, orderBy, direction);
-		Page<CategoriaDTO> listaCategoriaDto = listaCategoria.map(obj -> new CategoriaDTO(obj));
+		Page<CategoriaResponseDTO> listaCategoriaDto = listaCategoria.map(obj -> new CategoriaResponseDTO(obj));
 		return ResponseEntity.ok().body(listaCategoriaDto);
 	}
 	
@@ -59,16 +59,16 @@ public class CategoriaController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO categoriaDTO) {
-		Categoria categoria = categoriaService.fromDto(categoriaDTO);
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaResponseDTO categoriaResponseDto) {
+		Categoria categoria = categoriaService.fromDto(categoriaResponseDto);
 		categoria = categoriaService.insert(categoria);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO categoriaDTO, @PathVariable Integer id) {
-		Categoria categoria = categoriaService.fromDto(categoriaDTO);
+	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaResponseDTO categoriaResponseDto, @PathVariable Integer id) {
+		Categoria categoria = categoriaService.fromDto(categoriaResponseDto);
 		categoria.setId(id);
 		categoria = categoriaService.update(categoria);
 		return ResponseEntity.noContent().build();

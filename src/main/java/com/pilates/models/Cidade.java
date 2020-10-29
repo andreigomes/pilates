@@ -1,5 +1,7 @@
 package com.pilates.models;
 
+import lombok.Builder;
+
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+@Builder
 @Entity
 public class Cidade implements Serializable {
 	private static final long serialVersionUID = 1L;

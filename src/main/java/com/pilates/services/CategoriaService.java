@@ -10,7 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.pilates.dto.CategoriaDTO;
+import com.pilates.dto.response.CategoriaResponseDTO;
 import com.pilates.models.Categoria;
 import com.pilates.repositories.CategoriaRepository;
 import com.pilates.services.exceptions.DataIntegrityException;
@@ -39,8 +39,13 @@ public class CategoriaService {
 	}
 	
 	public Categoria update(Categoria categoria) {
-		findById(categoria.getId());
-		return categoriaRepository.save(categoria);
+		Categoria categoriaDB = findById(categoria.getId());
+		updateData(categoria, categoriaDB);
+		return categoriaRepository.save(categoriaDB);
+	}
+
+	private void updateData(Categoria categoria, Categoria categoriaDB) {
+		categoriaDB.setNome(categoria.getNome());
 	}
 	
 	public void delete(Integer id) {
@@ -59,8 +64,8 @@ public class CategoriaService {
 		
 	}
 	
-	public Categoria fromDto(CategoriaDTO categoriaDto) {
-		return new Categoria(categoriaDto.getId(), categoriaDto.getNome());
+	public Categoria fromDto(CategoriaResponseDTO categoriaResponseDto) {
+		return new Categoria(categoriaResponseDto.getId(), categoriaResponseDto.getNome());
 	}
 
 }

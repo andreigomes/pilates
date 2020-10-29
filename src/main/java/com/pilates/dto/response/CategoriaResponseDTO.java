@@ -1,4 +1,4 @@
-package com.pilates.dto;
+package com.pilates.dto.response;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 
 import com.pilates.models.Categoria;
 
-public class CategoriaDTO implements Serializable {
+public class CategoriaResponseDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
@@ -18,11 +18,11 @@ public class CategoriaDTO implements Serializable {
 	@NotNull
 	private String nome;
 	
-	public CategoriaDTO() {
+	public CategoriaResponseDTO() {
 		
 	}
 	
-	public CategoriaDTO(Categoria categoria) {
+	public CategoriaResponseDTO(Categoria categoria) {
 		this.id = categoria.getId();
 		this.nome = categoria.getNome();
 	}
