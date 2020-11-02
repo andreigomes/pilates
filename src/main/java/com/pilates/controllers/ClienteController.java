@@ -70,10 +70,10 @@ public class ClienteController {
 	}
 
 	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody ClienteResponseDTO clienteResponseDTO, @PathVariable Integer id) {
-		Cliente cliente = clienteService.fromDto(clienteResponseDTO);
+	public ResponseEntity<Void> update(@Valid @RequestBody ClienteRequestDTO clienteRequestDTO, @PathVariable Integer id) {
+		Cliente cliente = clienteService.fromDto(clienteRequestDTO);
 		cliente.setId(id);
-		cliente = clienteService.update(cliente);
+		clienteService.update(cliente);
 		return ResponseEntity.noContent().build();
 	}
 

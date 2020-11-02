@@ -53,6 +53,6 @@ public class ClienteRequestDTO {
     private String telefone2;
 
     private String telefone3;
-    
+
     private Integer cidadeId;
 }
